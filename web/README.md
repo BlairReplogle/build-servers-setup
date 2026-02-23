@@ -16,7 +16,7 @@ Its dangerous to go alone - take these
 ```
 sudo apt install curl
 sudo apt install git
-sudo apt install chromium
+sudo apt install chromium xdg-utils
 ```
 
 ## Shell Configuration
