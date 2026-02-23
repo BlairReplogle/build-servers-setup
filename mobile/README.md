@@ -20,8 +20,10 @@ Install homebrew
 Add the initialization line to `zprofile`
 ```
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$dotzprofile"
+```
 
-# source changes
+Source the changes in our current shell
+```
 source "$dotzprofile"
 ```
 
@@ -41,9 +43,11 @@ brew install coreutils curl git asdf
 
 Add the initialization line to `zprofile`
 ```
-echo '. $(brew --prefix asdf)/libexec/asdf.sh' >> "$dotzprofile"
+echo 'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"' >> "$dotzprofile"
+```
 
-# source changes
+Source the changes in our current shell
+```
 source "$dotzprofile"
 ```
 
@@ -158,7 +162,7 @@ Run first launch
 xcodebuild -runFirstLaunch
 ```
 
-Download all platforms for the version of Xcode you selected (you could also do this piece by piece if you only need iOS and not tvOS / watchOS / visionOS )
+Download all platforms for the version of Xcode you selected (you could also do this piece by piece if you only need iOS and not tvOS / watchOS / visionOS ) [Options](https://developer.apple.com/documentation/xcode/downloading-and-installing-additional-xcode-components)
 ```
 xcodebuild -downloadAllPlatforms
 ```

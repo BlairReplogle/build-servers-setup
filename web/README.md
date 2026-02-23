@@ -16,6 +16,7 @@ Its dangerous to go alone - take these
 ```
 sudo apt install curl
 sudo apt install git
+sudo apt install chromium
 ```
 
 ## Shell Configuration
@@ -73,6 +74,16 @@ asdf set -u awscli latest
 aws --version
 ```
 
+[helm](https://github.com/Antiarchitect/asdf-helm)
+
+Dependencies:
+```
+asdf plugin add helm
+asdf install helm latest
+asdf set -u helm latest
+helm version
+```
+
 [java](https://github.com/halcyon/asdf-java)
 
 Dependencies: bash, curl, unzip, jq
@@ -85,7 +96,7 @@ java --version
 
 [nodejs](https://github.com/asdf-vm/asdf-nodejs)
 
-Dependencies:
+Dependencies: libatomic1
 ```
 asdf plugin add nodejs
 asdf install nodejs latest
