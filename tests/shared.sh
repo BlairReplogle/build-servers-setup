@@ -68,4 +68,5 @@ check_asdf_plugin(){
 	fi
 
 	print_success "ASDF: $1 plugin is installed"
+	asdf list $1
 }

@@ -18,3 +18,8 @@ check_asdf_plugin nodejs
 check_asdf_plugin python
 check_asdf_plugin ruby
 check_asdf_plugin terraform
+
+# APT
+if command -v apt &> /dev/null; then
+	apt list --upgradable
+fi
