@@ -18,13 +18,13 @@ pipeline {
 				label params.NODE_LABEL_WEB
 			}
 			steps {
-				run()
+				run_tests()
 			}
 		}
 	}
 }
 
-def run() {
+def run_tests() {
 	sh """#!/bin/zsh -l
 		./tests/web.sh
 	"""
