@@ -1,0 +1,31 @@
+#!/usr/bin/env groovy
+
+pipeline {
+	agent {
+		label params.NODE_LABEL_WEB
+	}
+	parameters {
+		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'ubuntu-latest', description: 'Web node label')
+	}
+	options {
+		ansiColor('xterm')
+		disableConcurrentBuilds(abortPrevious: abortPreviousBuilds())
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('Web Tests') {
+			agent {
+				label params.NODE_LABEL_WEB
+			}
+			steps {
+				run()
+			}
+		}
+	}
+}
+
+def run() {
+	sh """#!/bin/zsh -l
+		./tests/web.sh
+	"""
+}
