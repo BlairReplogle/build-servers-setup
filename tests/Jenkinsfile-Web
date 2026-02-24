@@ -5,7 +5,7 @@ pipeline {
 		label params.NODE_LABEL_WEB
 	}
 	parameters {
-		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'ubuntu-latest', description: 'Web node label')
+		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
 	}
 	options {
 		ansiColor('xterm')
