@@ -14,9 +14,6 @@ pipeline {
 	}
 	stages {
 		stage('Web Tests') {
-			agent {
-				label params.NODE_LABEL_WEB
-			}
 			steps {
 				run_tests()
 			}
