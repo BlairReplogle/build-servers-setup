@@ -1,0 +1,28 @@
+#!/usr/bin/env groovy
+
+pipeline {
+	agent {
+		label params.NODE_LABEL_MOBILE
+	}
+	parameters {
+		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'macos-latest', description: 'Mac node label')
+	}
+	options {
+		ansiColor('xterm')
+		disableConcurrentBuilds(abortPrevious: true)
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('Mac Tests') {
+			steps {
+				run_tests()
+			}
+		}
+	}
+}
+
+def run_tests() {
+	sh """#!/bin/zsh -l
+		./tests/mac.sh
+	"""
+}
