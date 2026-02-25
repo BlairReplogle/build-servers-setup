@@ -8,6 +8,27 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NOCOLOR='\033[0m' # No Color
 
+print_header() {
+	local header_text="$1"
+	local text_length=${#header_text}
+
+	# Limit to 80 characters total
+	# Account for the text and ensure we don't exceed 80 chars
+	if [ "$text_length" -gt 78 ]; then
+		header_text="${header_text:0:78}"
+		text_length=78
+	fi
+
+	# Print line of equal signs
+	printf '%*s\n' "$text_length" ' ' | tr ' ' '='
+
+	# Print header text
+	echo "$header_text"
+
+	# Print another line of equal signs
+	printf '%*s\n' "$text_length" ' ' | tr ' ' '='
+}
+
 # Function to print green text
 print_green() {
 	echo -e "${GREEN}$1${NOCOLOR}"
@@ -15,6 +36,7 @@ print_green() {
 
 print_success() {
 	print_green "✓ $1"
+	[ -n "$2" ] && [ "$2" -eq 1 ] && printf "\n"
 }
 
 # Function to print red text
@@ -29,15 +51,19 @@ print_failure() {
 
 # ZSH
 check_zsh() {
+	print_header "Checking zsh..."
+
 	if [ "$SHELL" != "/bin/zsh" ] && [ "$SHELL" != "/usr/bin/zsh" ]; then
 		print_failure "Current shell is not zsh. Current shell: $SHELL"
 	fi
 
-	print_success "Shell is zsh"
+	print_success "Shell is zsh" 1
 }
 
 # Docker
 check_docker() {
+	print_header "Checking docker..."
+
 	if ! command -v docker &> /dev/null; then
 		print_failure "Docker is not installed"
 	fi
@@ -48,25 +74,29 @@ check_docker() {
 		print_failure "Docker is installed but the daemon is not running"
 	fi
 
-	print_success "Docker daemon is running"
 	docker --version
+	print_success "Docker daemon is running" 1
 }
 
 # ASDF
 check_asdf() {
+	print_header "Checking asdf..."
+
 	if ! command -v asdf &> /dev/null; then
 		print_failure "ASDF is not installed"
 	fi
 
-	print_success "ASDF is installed"
 	asdf --version
+	print_success "ASDF is installed" 1
 }
 
-check_asdf_plugin(){
+check_asdf_plugin() {
+	print_header "Checking asdf $1 plugin..."
+
 	if ! asdf plugin list | grep -q "^${1}$"; then
 		print_failure "$1 plugin is not installed"
 	fi
 
-	print_success "ASDF: $1 plugin is installed"
 	asdf list $1
+	print_success "ASDF: $1 plugin is installed" 1
 }
