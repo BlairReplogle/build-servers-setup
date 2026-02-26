@@ -8,7 +8,7 @@ pipeline {
 		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
 	}
 	options {
-		ansiColor('xterm')
+		// ansiColor('xterm')
 		disableConcurrentBuilds(abortPrevious: true)
 		skipStagesAfterUnstable()
 	}
