@@ -53,10 +53,11 @@ print_failure() {
 check_zsh() {
 	print_header "Checking zsh..."
 
-	if [ "$SHELL" != "/bin/zsh" ] && [ "$SHELL" != "/usr/bin/zsh" ]; then
+	if [[ ! "$SHELL" == *"zsh"* ]]; then
 		print_failure "Current shell is not zsh. Current shell: $SHELL"
 	fi
 
+	echo "Shell: $SHELL"
 	print_success "Shell is zsh" 1
 }
 
