@@ -53,12 +53,12 @@ print_failure() {
 check_zsh() {
 	print_header "Checking zsh..."
 
-	if [[ ! "$SHELL" == *"zsh"* ]]; then
+	if [ ! -n "$ZSH_VERSION" ]; then
+		echo "ZSH_VERSION: $ZSH_VERSION"
+		print_success "Current shell is zsh"
+	else
 		print_failure "Current shell is not zsh. Current shell: $SHELL"
 	fi
-
-	echo "Shell: $SHELL"
-	print_success "Shell is zsh" 1
 }
 
 # Docker
@@ -99,5 +99,34 @@ check_asdf_plugin() {
 	fi
 
 	asdf list $1
+
+	case "$1" in
+	"awscli")
+		aws --version
+		;;
+	"helm")
+		helm version
+		;;
+	"java")
+		java --version
+		;;
+	"nodejs")
+		node -v
+		;;
+	"ruby")
+		ruby -v
+		;;
+	"terraform")
+		terraform -v
+		;;
+	"python")
+		python --version
+		;;
+	*)
+		echo "Unknown command: $1"
+		echo "Use '$0 help' for available commands"
+		;;
+	esac
+
 	print_success "ASDF: $1 plugin is installed" 1
 }
