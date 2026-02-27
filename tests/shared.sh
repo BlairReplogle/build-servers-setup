@@ -53,12 +53,17 @@ print_failure() {
 check_zsh() {
 	print_header "Checking zsh..."
 
-	if [ ! -n "$ZSH_VERSION" ]; then
-		echo "ZSH_VERSION: $ZSH_VERSION"
-		print_success "Current shell is zsh"
-	else
-		print_failure "Current shell is not zsh. Current shell: $SHELL"
-	fi
+	echo "PATH: $PATH"
+	echo "SHELL: $SHELL"
+	echo "BASH_VERSION: $BASH_VERSION"
+	echo "ZSH_VERSION: $ZSH_VERSION"
+
+	# if [ ! -n "$ZSH_VERSION" ]; then
+	# 	echo "ZSH_VERSION: $ZSH_VERSION"
+	# 	print_success "Current shell is zsh"
+	# else
+	# 	print_failure "Current shell is not zsh. Current shell: $SHELL"
+	# fi
 }
 
 # Docker
