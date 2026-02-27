@@ -19,10 +19,17 @@ pipeline {
 			}
 		}
 	}
+	post {
+		always {
+			script {
+				archiveArtifacts artifacts: 'web/*', allowEmptyArchive: false
+			}
+		}
+	}
 }
 
 def run_tests() {
-	sh """#!/bin/zsh -l
+	sh """#!/usr/bin/env zsh -l
 		./tests/web.sh
 	"""
 }
