@@ -22,7 +22,7 @@ pipeline {
 }
 
 def run_tests() {
-	sh """#!/bin/zsh -l
+	sh """
 		./tests/mac.sh
 	"""
 }

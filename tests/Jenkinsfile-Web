@@ -29,7 +29,7 @@ pipeline {
 }
 
 def run_tests() {
-	sh """#!/usr/bin/env zsh -l
+	sh """
 		./tests/web.sh
 	"""
 }

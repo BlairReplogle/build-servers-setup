@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
-source "$SCRIPTPATH"/shared.sh
+. "$SCRIPTPATH"/shared.sh
 
 check_homebrew() {
 	print_header "Checking homebrew..."
