@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
-source "$SCRIPTPATH"/shared.sh
+. "$SCRIPTPATH"/shared.sh
 
 # Check if the current shell is zsh
 check_zsh
