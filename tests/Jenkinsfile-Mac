@@ -17,9 +17,9 @@ pipeline {
 	stages {
 		stage('Mac Tests') {
 			steps {
-				setup_homebrew()
-				setup_asdf()
-				setup_android()
+				setupHomebrew()
+				setupAsdf()
+				setupAndroid()
 				run_tests()
 			}
 		}
