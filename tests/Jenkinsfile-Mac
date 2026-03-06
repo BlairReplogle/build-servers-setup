@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 
+@Library('jenkins-shared-library') _
+
 pipeline {
 	agent {
 		label params.NODE_LABEL_MOBILE
