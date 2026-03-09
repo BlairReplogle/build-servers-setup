@@ -34,10 +34,13 @@ check_android_command_line_tools(){
 		# platform tools
 		"adb"
 		"fastboot"
-		# emulator
-		"crashreport"
-		"emulator"
 	)
+
+	# Test for android emulator if TEST_ANDROID_EMULATOR is set
+	if [[ -n "$TEST_ANDROID_EMULATOR" ]]; then
+		cmdline_tools+=("crashreport")
+		cmdline_tools+=("emulator")
+	fi
 
 	for tool in "${cmdline_tools[@]}"; do
 		if command -v "$tool" &> /dev/null; then
