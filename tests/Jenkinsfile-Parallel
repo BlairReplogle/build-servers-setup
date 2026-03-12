@@ -27,7 +27,7 @@ pipeline {
 						setupHomebrew()
 						setupAsdf()
 						setupAndroid()
-						run_tests()
+						run_mac_tests()
 					}
 				}
 				stage('Web Tests') {
@@ -39,7 +39,7 @@ pipeline {
 						setupHomebrew()
 						setupAsdf()
 						setupAndroid()
-						run_tests()
+						run_web_tests()
 					}
 				}
 			}
@@ -55,7 +55,13 @@ pipeline {
 	}
 }
 
-def run_tests() {
+def run_mac_tests() {
+	sh """
+		./tests/mac.sh
+	"""
+}
+
+def run_web_tests() {
 	sh """
 		./tests/web.sh
 	"""
