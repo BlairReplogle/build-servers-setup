@@ -56,12 +56,16 @@ pipeline {
 }
 
 def run_mac_tests() {
+	echo "run mac tests..."
+
 	sh """
 		./tests/mac.sh
 	"""
 }
 
 def run_web_tests() {
+	echo "run web tests..."
+
 	sh """
 		./tests/web.sh
 	"""
