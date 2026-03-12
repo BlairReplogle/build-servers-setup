@@ -3,6 +3,9 @@
 @Library('jenkins-shared-library') _
 
 pipeline {
+	agent {
+		label 'built-in'
+	}
 	parameters {
 		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'macos-latest', description: 'Mac node label')
 		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
