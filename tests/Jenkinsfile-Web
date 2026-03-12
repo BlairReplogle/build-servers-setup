@@ -17,6 +17,7 @@ pipeline {
 	stages {
 		stage('Web Tests') {
 			steps {
+				osInfo()
 				setupHomebrew()
 				setupAsdf()
 				setupAndroid()
