@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
 . "$SCRIPTPATH"/shared.sh
 
@@ -5,7 +7,7 @@ check_homebrew() {
 	print_header "Checking homebrew..."
 
 	# Homebrew
-	if ! command -v brew &> /dev/null; then
+	if ! command -v brew >/dev/null 2>&1; then
 		print_failure "Homebrew is not installed"
 	fi
 
@@ -41,7 +43,7 @@ check_android_command_line_tools(){
 	fi
 
 	for tool in "${cmdline_tools[@]}"; do
-		if command -v "$tool" &> /dev/null; then
+		if command -v "$tool" >/dev/null 2>&1; then
 			tool_path=$(which $tool 2>&1 | head -n 1)
 			print_success "$tool is installed - $tool_path"
 		else
@@ -78,7 +80,7 @@ check_xcode() {
 	fi
 
 	# 1. Check if Xcode Command Line Tools are installed
-	if xcode-select -p &> /dev/null; then
+	if xcode-select -p >/dev/null 2>&1; then
 		echo "Xcode command line tools: $(xcode-select -p)"
 		print_success "Xcode command line tools installed"
 	else
@@ -86,7 +88,7 @@ check_xcode() {
 	fi
 
 	# 2. Check if xcodes is installed
-	if command -v xcodes &> /dev/null; then
+	if command -v xcodes >/dev/null 2>&1; then
 		echo "Xcodes version: $(xcodes version)"
 		print_success "Xcodes is installed"
 	else
@@ -110,7 +112,7 @@ check_xcode() {
 		fi
 
 		DEVELOPER_DIR="$version_path"
-		if xcodebuild -license status &> /dev/null; then
+		if xcodebuild -license status >/dev/null 2>&1; then
 			print_success "License agreement accepted"
 		else
 			print_failure "Xcode license agreement not accepted"

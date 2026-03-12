@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Define reusable functions
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
@@ -69,13 +71,13 @@ check_zsh() {
 check_docker() {
 	print_header "Checking docker..."
 
-	if ! command -v docker &> /dev/null; then
+	if ! command -v docker >/dev/null 2>&1; then
 		print_failure "Docker is not installed"
 	fi
 
 	print_success "Docker is installed"
 
-	if ! docker ps &> /dev/null; then
+	if ! docker ps >/dev/null 2>&1; then
 		print_failure "Docker is installed but the daemon is not running"
 	fi
 
@@ -87,7 +89,7 @@ check_docker() {
 check_asdf() {
 	print_header "Checking asdf..."
 
-	if ! command -v asdf &> /dev/null; then
+	if ! command -v asdf >/dev/null 2>&1; then
 		print_failure "ASDF is not installed"
 	fi
 

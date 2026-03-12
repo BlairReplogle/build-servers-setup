@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
 . "$SCRIPTPATH"/shared.sh
 
@@ -18,6 +20,6 @@ check_asdf_plugin ruby
 check_asdf_plugin terraform
 
 # APT
-if command -v apt &> /dev/null; then
+if command -v apt >/dev/null 2>&1; then
 	apt list --upgradable
 fi
