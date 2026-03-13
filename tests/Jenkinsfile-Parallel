@@ -19,9 +19,6 @@ pipeline {
 		stage('run') {
 			parallel {
 				stage('Mac Tests') {
-					agent {
-						label params.NODE_LABEL_MOBILE
-					}
 					steps {
 						osInfo()
 						setupHomebrew()
