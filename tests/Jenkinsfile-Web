@@ -1,0 +1,39 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library') _
+
+pipeline {
+	agent {
+		label params.NODE_LABEL_WEB
+	}
+	parameters {
+		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
+	}
+	options {
+		ansiColor('xterm')
+		disableConcurrentBuilds(abortPrevious: true)
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('Web Tests') {
+			steps {
+				osInfo()
+				setupAsdf()
+				run_tests()
+			}
+		}
+	}
+	post {
+		always {
+			script {
+				archiveArtifacts artifacts: 'web/*', allowEmptyArchive: false
+			}
+		}
+	}
+}
+
+def run_tests() {
+	sh """
+		./tests/web.sh
+	"""
+}
