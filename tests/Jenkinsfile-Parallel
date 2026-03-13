@@ -4,7 +4,7 @@
 
 pipeline {
 	agent {
-		label 'built-in'
+		label 'macos-latest'
 	}
 	parameters {
 		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'macos-latest', description: 'Mac node label')
@@ -27,10 +27,7 @@ pipeline {
 						setupHomebrew()
 						setupAsdf()
 						setupAndroid()
-
-						sh """
-							./tests/mac.sh
-						"""
+						run_mac_tests()
 					}
 				}
 				stage('Web Tests') {
@@ -42,14 +39,20 @@ pipeline {
 						setupHomebrew()
 						setupAsdf()
 						setupAndroid()
-						script {
-							run_web_tests()
-						}
+						run_web_tests()
 					}
 				}
 			}
 		}
 	}
+}
+
+def run_mac_tests() {
+	echo "run mac tests..."
+
+	sh """
+		./tests/mac.sh
+	"""
 }
 
 def run_web_tests() {
