@@ -1,0 +1,61 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library') _
+
+pipeline {
+	agent {
+		label 'macos-latest'
+	}
+	parameters {
+		string(name: 'NODE_LABEL_MOBILE', defaultValue: 'macos-latest', description: 'Mac node label')
+		string(name: 'NODE_LABEL_WEB', defaultValue: 'ubuntu-latest', description: 'Web node label')
+	}
+	options {
+		ansiColor('xterm')
+		disableConcurrentBuilds(abortPrevious: true)
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('run') {
+			parallel {
+				stage('Mac Tests') {
+					steps {
+						osInfo()
+						setupHomebrew()
+						setupAsdf()
+						setupAndroid()
+						run_mac_tests()
+					}
+				}
+				stage('Web Tests') {
+					agent {
+						label params.NODE_LABEL_WEB
+					}
+					steps {
+						osInfo()
+						setupHomebrew()
+						setupAsdf()
+						setupAndroid()
+						run_web_tests()
+					}
+				}
+			}
+		}
+	}
+}
+
+def run_mac_tests() {
+	echo "run mac tests..."
+
+	sh """
+		./tests/mac.sh
+	"""
+}
+
+def run_web_tests() {
+	echo "run web tests..."
+
+	sh """
+		./tests/web.sh
+	"""
+}

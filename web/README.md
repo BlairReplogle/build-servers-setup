@@ -16,7 +16,16 @@ Its dangerous to go alone - take these
 ```
 sudo apt install curl
 sudo apt install git
+```
+
+### Puppeteer
+
+[System Requirements](https://pptr.dev/guides/system-requirements)
+[Linux Package Versions](https://source.chromium.org/chromium/chromium/src/+/main:chrome/installer/linux/debian/dist_package_versions.json)
+```
 sudo apt install chromium xdg-utils
+sudo apt install libatk1.0-0
+sudo apt install libatk-bridge2.0-0
 ```
 
 ## Shell Configuration
